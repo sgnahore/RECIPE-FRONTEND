@@ -19,3 +19,7 @@ export interface recipeTypeConverted {
     calorieCount: number;
     popular: boolean;
 }
+
+export interface ListOfRecipesProps {
+    allRecipes: recipeTypeConverted[];
+}
