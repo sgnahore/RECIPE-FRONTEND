@@ -23,3 +23,13 @@ export interface recipeTypeConverted {
 export interface ListOfRecipesProps {
     allRecipes: recipeTypeConverted[];
 }
+
+export interface CreateRecipeProps {
+    getRecipes?: () => void;
+}
+
+export interface CreatedRecipeType {
+    name: string;
+    cuisine: string;
+    cookingTimeMinutes: number;
+}

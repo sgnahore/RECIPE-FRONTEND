@@ -3,7 +3,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { recipeTypeConverted, recipeTypeDB } from "./Interfaces";
 import axios from "axios";
-import { DisplaySingleRecipe } from "./DisplaySingleRecipe";
+import { CreateRecipe } from "../pages/CreateRecipe";
 
 function convertRecipeFormat(eachRecipe: recipeTypeDB) {
     const {
@@ -52,7 +52,7 @@ function App() {
     return (
         <div className="App">
             <ListOfRecipes allRecipes={recipes} />
-            <DisplaySingleRecipe />
+            <CreateRecipe getRecipes={getRecipes} />
         </div>
     );
 }
