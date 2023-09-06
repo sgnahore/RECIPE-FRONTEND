@@ -3,7 +3,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { recipeTypeConverted, recipeTypeDB } from "./Interfaces";
 import axios from "axios";
-import { CreateRecipe } from "../pages/CreateRecipe";
+import { CreateRecipe } from "./CreateRecipe";
 
 function convertRecipeFormat(eachRecipe: recipeTypeDB) {
     const {

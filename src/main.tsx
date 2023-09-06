@@ -4,7 +4,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./components/App";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Welcome } from "./pages/WelcomePage";
-import { CreateRecipe } from "./pages/CreateRecipe";
 
 const router = createBrowserRouter([
     {
@@ -15,10 +14,6 @@ const router = createBrowserRouter([
         path: "recipes",
         element: <App />,
     },
-    {
-        path: "create",
-        element: <CreateRecipe getRecipes={getRecipes} />,
-    },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
@@ -28,6 +23,3 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         </ChakraProvider>
     </React.StrictMode>
 );
-function getRecipes(): void {
-    throw new Error("Function not implemented.");
-}

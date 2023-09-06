@@ -43,7 +43,7 @@ export function CreateRecipe({
             };
 
             const response = await axios.post(
-                "http://localhost:4000/recipes",
+                "https://recipe-app-59ck.onrender.com/recipes",
                 addedRecipe
             );
 
@@ -53,6 +53,7 @@ export function CreateRecipe({
             setCookingTimeMinutes(15);
             console.log(
                 "Recipe:",
+
                 name,
                 "has been added to the database",
                 response.data
@@ -74,7 +75,7 @@ export function CreateRecipe({
                     />
                 </FormControl>
             </VStack>
-            <NumberInput defaultValue={15} min={10} max={20}>
+            <NumberInput value={cookingTimeMinutes} min={10} max={20}>
                 <NumberInputField />
                 <NumberInputStepper>
                     <NumberIncrementStepper />
