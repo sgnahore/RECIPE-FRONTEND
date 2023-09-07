@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./components/App";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Welcome } from "./pages/WelcomePage";
+import { CreateRecipe } from "./components/CreateRecipe";
 
 const router = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
     {
         path: "recipes",
         element: <App />,
+    },
+    {
+        path: "create",
+        element: <CreateRecipe />,
     },
 ]);
 

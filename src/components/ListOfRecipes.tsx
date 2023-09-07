@@ -1,5 +1,4 @@
 import {
-    Heading,
     ListItem,
     UnorderedList,
     Text,
@@ -9,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { ListOfRecipesProps, recipeTypeConverted } from "./Interfaces";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export function ListOfRecipes({ allRecipes }: ListOfRecipesProps): JSX.Element {
     const [singleRecipe, setSingleRecipe] =
@@ -17,11 +17,14 @@ export function ListOfRecipes({ allRecipes }: ListOfRecipesProps): JSX.Element {
     const handleViewRecipe = (recipe: recipeTypeConverted) =>
         setSingleRecipe(recipe);
 
+    const handleCloseRecipe = () => setSingleRecipe(null);
     return (
         <>
-            <Heading mb={4} fontSize="2xl">
-                Choose Your Favorite Recipe
-            </Heading>
+            <Link to="/create">
+                {" "}
+                <Button type="submit">Create a Recipe</Button>
+            </Link>
+
             <Flex
                 flexDirection="column"
                 alignItems="center"
@@ -70,8 +73,8 @@ export function ListOfRecipes({ allRecipes }: ListOfRecipesProps): JSX.Element {
                     {singleRecipe && (
                         <>
                             {singleRecipe.name} {singleRecipe.cuisine} Cooking
-                            Time: {singleRecipe.cookingTimeMinutes}
-                            Allergen Free?:{" "}
+                            Time: {singleRecipe.cookingTimeMinutes}minutes
+                            Allergen Free?{"  "}
                             {singleRecipe.allergenFree === true ? "Yes" : "No"}
                             {singleRecipe.spiceLevel === "Mild"
                                 ? "🌶️"
@@ -80,6 +83,13 @@ export function ListOfRecipes({ allRecipes }: ListOfRecipesProps): JSX.Element {
                                 : singleRecipe.spiceLevel === "Hot"
                                 ? "🌶️🌶️🌶️"
                                 : null}
+                            <Button
+                                colorScheme="teal"
+                                size="sm"
+                                onClick={() => handleCloseRecipe()}
+                            >
+                                Close
+                            </Button>
                         </>
                     )}
                 </Text>

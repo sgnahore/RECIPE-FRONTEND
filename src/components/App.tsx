@@ -19,7 +19,6 @@ function convertRecipeFormat(eachRecipe: recipeTypeDB) {
         allergen_free: allergenFree,
         spice_level: spiceLevel,
         cooking_time_minutes: cookingTimeMinutes,
-        calorie_count: calorieCount,
         popular,
     } = eachRecipe;
 
@@ -30,7 +29,6 @@ function convertRecipeFormat(eachRecipe: recipeTypeDB) {
         allergenFree,
         spiceLevel,
         cookingTimeMinutes,
-        calorieCount,
         popular,
     };
 }

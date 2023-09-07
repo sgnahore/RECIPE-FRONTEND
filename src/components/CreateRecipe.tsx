@@ -23,6 +23,7 @@ export function CreateRecipe({
     const [cuisine, setCuisine] = useState<string>("");
     const [cookingTimeMinutes, setCookingTimeMinutes] = useState(15);
     const [allergenFree, setAllergenFree] = useState(false);
+    const [spiceLevel, setSpiceLevel] = useState<string>("");
 
     const handleCreateName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
@@ -40,21 +41,27 @@ export function CreateRecipe({
         setAllergenFree(!allergenFree);
     };
 
+    const handleSelectSpiceLevel = (selectedSpiceLevel: string) => {
+        setSpiceLevel(selectedSpiceLevel);
+    };
+
     const handleAddRecipe = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const addedRecipe: CreatedRecipeType = {
                 name: name,
                 cuisine: cuisine,
-                cookingTimeMinutes: cookingTimeMinutes,
-                allergenFree: allergenFree,
+                cooking_time_minutes: cookingTimeMinutes,
+                allergen_free: allergenFree,
+                spice_level: spiceLevel,
             };
-            console.log("sending", cookingTimeMinutes);
 
             const response = await axios.post(
                 baseURL + "/recipes",
                 addedRecipe
             );
+
+            console.log("sending", addedRecipe);
 
             getRecipes();
             setName(" ");
@@ -82,8 +89,11 @@ export function CreateRecipe({
                         onChange={handleCreateName}
                     />
                 </FormControl>
+
                 <Text>Cooking Time: {cookingTimeMinutes}</Text>
-                <Button onClick={handleCookingTimeChange}>"+"</Button>
+
+                <Button onClick={handleCookingTimeChange}>+</Button>
+
                 <Checkbox
                     isChecked={allergenFree}
                     onChange={handleIsAllergenFree}
@@ -94,7 +104,7 @@ export function CreateRecipe({
 
             <Menu>
                 <MenuButton as={Button} colorScheme="blue">
-                    {cuisine ? cuisine : "Dropdown"}
+                    {cuisine ? cuisine : "Choose Cuisine"}
                 </MenuButton>
                 <MenuList>
                     <MenuItem onClick={() => handleSelectCuisine("Italian")}>
@@ -105,6 +115,23 @@ export function CreateRecipe({
                     </MenuItem>
                     <MenuItem onClick={() => handleSelectCuisine("Caribbean")}>
                         Caribbean{" "}
+                    </MenuItem>
+                </MenuList>
+            </Menu>
+
+            <Menu>
+                <MenuButton as={Button} colorScheme="blue">
+                    {spiceLevel ? spiceLevel : "Spice Level"}
+                </MenuButton>
+                <MenuList>
+                    <MenuItem onClick={() => handleSelectSpiceLevel("Mild")}>
+                        Mild
+                    </MenuItem>
+                    <MenuItem onClick={() => handleSelectSpiceLevel("Medium")}>
+                        Medium
+                    </MenuItem>
+                    <MenuItem onClick={() => handleSelectSpiceLevel("Hot")}>
+                        Hot{" "}
                     </MenuItem>
                 </MenuList>
             </Menu>
