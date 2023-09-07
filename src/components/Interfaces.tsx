@@ -32,4 +32,5 @@ export interface CreatedRecipeType {
     name: string;
     cuisine: string;
     cookingTimeMinutes: number;
+    allergenFree: boolean;
 }

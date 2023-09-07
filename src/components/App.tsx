@@ -4,6 +4,12 @@ import { useState, useEffect } from "react";
 import { recipeTypeConverted, recipeTypeDB } from "./Interfaces";
 import axios from "axios";
 import { CreateRecipe } from "./CreateRecipe";
+import { NavBar } from "./NavBar";
+
+export const baseURL =
+    process.env.NODE_ENV === "production"
+        ? "https://recipe-app-59ck.onrender.com/recipes"
+        : "http://localhost:4000";
 
 function convertRecipeFormat(eachRecipe: recipeTypeDB) {
     const {
@@ -34,9 +40,7 @@ function App() {
 
     const getRecipes = async () => {
         try {
-            const response = await axios.get(
-                "https://recipe-app-59ck.onrender.com/recipes"
-            );
+            const response = await axios.get(baseURL + "/recipes");
             const allRecipes = response.data.map((eachRecipe: recipeTypeDB) =>
                 convertRecipeFormat(eachRecipe)
             );
@@ -51,6 +55,7 @@ function App() {
     }, []);
     return (
         <div className="App">
+            <NavBar />
             <ListOfRecipes allRecipes={recipes} />
             <CreateRecipe getRecipes={getRecipes} />
         </div>

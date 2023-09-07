@@ -6,6 +6,7 @@ import {
     Text,
     Button,
     Box,
+    Flex,
 } from "@chakra-ui/react";
 import { ListOfRecipesProps, recipeTypeConverted } from "./Interfaces";
 import { useState } from "react";
@@ -19,19 +20,47 @@ export function ListOfRecipes({ allRecipes }: ListOfRecipesProps): JSX.Element {
 
     return (
         <Container>
-            <Heading>Choose Your Favourite Recipe</Heading>
-            <UnorderedList>
-                {allRecipes.map((recipe) => (
-                    <ListItem key={recipe.recipeId}>
-                        {recipe.name} {recipe.cookingTimeMinutes}minutes
-                        {recipe.popular && <Text> 🔥 🔥 🔥 </Text>}
-                        <Button onClick={() => handleViewRecipe(recipe)}>
-                            {" "}
-                            View More
-                        </Button>
-                    </ListItem>
-                ))}
-            </UnorderedList>
+            <Flex
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                mt={6}
+            >
+                <Heading mb={4} fontSize="2xl">
+                    Choose Your Favorite Recipe
+                </Heading>
+                <UnorderedList listStyleType="none" pl={0}>
+                    {allRecipes.map((recipe) => (
+                        <ListItem
+                            key={recipe.recipeId}
+                            p={8}
+                            m={4}
+                            borderRadius="lg"
+                            boxShadow="md"
+                            bg="white"
+                            display="flex"
+                            justifyContent="space-between"
+                            alignItems="center"
+                            width="500px"
+                        >
+                            <Text fontWeight="bold">{recipe.name}</Text>
+                            <Text fontSize="sm">
+                                {recipe.cookingTimeMinutes} minutes
+                            </Text>
+                            {recipe.popular && (
+                                <Text fontSize="xl">🔥🔥🔥</Text>
+                            )}
+                            <Button
+                                colorScheme="teal"
+                                size="sm"
+                                onClick={() => handleViewRecipe(recipe)}
+                            >
+                                View More
+                            </Button>
+                        </ListItem>
+                    ))}
+                </UnorderedList>
+            </Flex>
             <Box
                 bg={singleRecipe ? "green" : "white"}
                 w="100%"
@@ -41,7 +70,10 @@ export function ListOfRecipes({ allRecipes }: ListOfRecipesProps): JSX.Element {
                 <Text>
                     {singleRecipe && (
                         <>
-                            {singleRecipe.name} {singleRecipe.cuisine}{" "}
+                            {singleRecipe.name} {singleRecipe.cuisine} Cooking
+                            Time: {singleRecipe.cookingTimeMinutes}
+                            Allergen Free?:{" "}
+                            {singleRecipe.allergenFree === true ? "Yes" : "No"}
                             {singleRecipe.spiceLevel === "Mild"
                                 ? "🌶️"
                                 : singleRecipe.spiceLevel === "Medium"

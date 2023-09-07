@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
     Button,
+    Checkbox,
     FormControl,
     FormLabel,
     Input,
@@ -17,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { CreateRecipeProps, CreatedRecipeType } from "../components/Interfaces";
 import axios from "axios";
+import { baseURL } from "./App";
 
 export function CreateRecipe({
     getRecipes = () => undefined,
@@ -24,13 +26,22 @@ export function CreateRecipe({
     const [name, setName] = useState<string>("");
     const [cuisine, setCuisine] = useState<string>("");
     const [cookingTimeMinutes, setCookingTimeMinutes] = useState(15);
+    const [allergenFree, setAllergenFree] = useState(false);
 
     const handleCreateName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
     };
 
+    const handleCookingTimeChange = (valueAsString: string) => {
+        setCookingTimeMinutes(+valueAsString);
+    };
+
     const handleSelectCuisine = (selectedCuisine: string) => {
         setCuisine(selectedCuisine);
+    };
+
+    const handleIsAllergenFree = () => {
+        setAllergenFree(!allergenFree);
     };
 
     const handleAddRecipe = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -40,10 +51,12 @@ export function CreateRecipe({
                 name: name,
                 cuisine: cuisine,
                 cookingTimeMinutes: cookingTimeMinutes,
+                allergenFree: allergenFree,
             };
+            console.log("sending", cookingTimeMinutes);
 
             const response = await axios.post(
-                "https://recipe-app-59ck.onrender.com/recipes",
+                baseURL + "/recipes",
                 addedRecipe
             );
 
@@ -53,7 +66,6 @@ export function CreateRecipe({
             setCookingTimeMinutes(15);
             console.log(
                 "Recipe:",
-
                 name,
                 "has been added to the database",
                 response.data
@@ -74,8 +86,19 @@ export function CreateRecipe({
                         onChange={handleCreateName}
                     />
                 </FormControl>
+                <Checkbox
+                    isChecked={allergenFree}
+                    onChange={handleIsAllergenFree}
+                >
+                    Allergen Free?
+                </Checkbox>
             </VStack>
-            <NumberInput value={cookingTimeMinutes} min={10} max={20}>
+            <NumberInput
+                value={cookingTimeMinutes}
+                min={10}
+                max={20}
+                onChange={handleCookingTimeChange} // Add this handler for cooking time
+            >
                 <NumberInputField />
                 <NumberInputStepper>
                     <NumberIncrementStepper />
