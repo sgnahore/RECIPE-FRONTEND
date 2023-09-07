@@ -9,11 +9,7 @@ import {
     MenuButton,
     MenuItem,
     MenuList,
-    NumberDecrementStepper,
-    NumberIncrementStepper,
-    NumberInput,
-    NumberInputField,
-    NumberInputStepper,
+    Text,
     VStack,
 } from "@chakra-ui/react";
 import { CreateRecipeProps, CreatedRecipeType } from "../components/Interfaces";
@@ -32,8 +28,8 @@ export function CreateRecipe({
         setName(e.target.value);
     };
 
-    const handleCookingTimeChange = (valueAsString: string) => {
-        setCookingTimeMinutes(+valueAsString);
+    const handleCookingTimeChange = () => {
+        setCookingTimeMinutes(cookingTimeMinutes + 1);
     };
 
     const handleSelectCuisine = (selectedCuisine: string) => {
@@ -86,6 +82,8 @@ export function CreateRecipe({
                         onChange={handleCreateName}
                     />
                 </FormControl>
+                <Text>Cooking Time: {cookingTimeMinutes}</Text>
+                <Button onClick={handleCookingTimeChange}>"+"</Button>
                 <Checkbox
                     isChecked={allergenFree}
                     onChange={handleIsAllergenFree}
@@ -93,18 +91,7 @@ export function CreateRecipe({
                     Allergen Free?
                 </Checkbox>
             </VStack>
-            <NumberInput
-                value={cookingTimeMinutes}
-                min={10}
-                max={20}
-                onChange={handleCookingTimeChange} // Add this handler for cooking time
-            >
-                <NumberInputField />
-                <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                </NumberInputStepper>
-            </NumberInput>
+
             <Menu>
                 <MenuButton as={Button} colorScheme="blue">
                     {cuisine ? cuisine : "Dropdown"}

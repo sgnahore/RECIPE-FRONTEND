@@ -10,7 +10,7 @@ export interface recipeTypeDB {
 }
 
 export interface recipeTypeConverted {
-    recipeId: number;
+    recipeID: number;
     name: string;
     cuisine: string;
     allergenFree: boolean;

@@ -1,5 +1,4 @@
 import {
-    Container,
     Heading,
     ListItem,
     UnorderedList,
@@ -19,20 +18,20 @@ export function ListOfRecipes({ allRecipes }: ListOfRecipesProps): JSX.Element {
         setSingleRecipe(recipe);
 
     return (
-        <Container>
+        <>
+            <Heading mb={4} fontSize="2xl">
+                Choose Your Favorite Recipe
+            </Heading>
             <Flex
                 flexDirection="column"
                 alignItems="center"
                 justifyContent="center"
                 mt={6}
             >
-                <Heading mb={4} fontSize="2xl">
-                    Choose Your Favorite Recipe
-                </Heading>
                 <UnorderedList listStyleType="none" pl={0}>
                     {allRecipes.map((recipe) => (
                         <ListItem
-                            key={recipe.recipeId}
+                            key={recipe.recipeID}
                             p={8}
                             m={4}
                             borderRadius="lg"
@@ -85,6 +84,6 @@ export function ListOfRecipes({ allRecipes }: ListOfRecipesProps): JSX.Element {
                     )}
                 </Text>
             </Box>
-        </Container>
+        </>
     );
 }
