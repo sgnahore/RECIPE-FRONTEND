@@ -5,17 +5,31 @@ export interface recipeTypeDB {
     allergen_free: boolean;
     spice_level: string;
     cooking_time_minutes: number;
-    calorie_count: number;
     popular: boolean;
 }
 
 export interface recipeTypeConverted {
-    recipeId: number;
+    recipeID: number;
     name: string;
     cuisine: string;
     allergenFree: boolean;
     spiceLevel: string;
     cookingTimeMinutes: number;
-    calorieCount: number;
     popular: boolean;
+}
+
+export interface ListOfRecipesProps {
+    allRecipes: recipeTypeConverted[];
+}
+
+export interface CreateRecipeProps {
+    getRecipes?: () => void;
+}
+
+export interface CreatedRecipeType {
+    name: string;
+    cuisine: string;
+    cooking_time_minutes: number;
+    allergen_free: boolean;
+    spice_level: string;
 }
