@@ -29,8 +29,12 @@ export function CreateRecipe({
         setName(e.target.value);
     };
 
-    const handleCookingTimeChange = () => {
+    const handleAddCookingTimeChange = () => {
         setCookingTimeMinutes(cookingTimeMinutes + 1);
+    };
+
+    const handleMinusCookingTimeChange = () => {
+        setCookingTimeMinutes(cookingTimeMinutes - 1);
     };
 
     const handleSelectCuisine = (selectedCuisine: string) => {
@@ -92,7 +96,8 @@ export function CreateRecipe({
 
                 <Text>Cooking Time: {cookingTimeMinutes}</Text>
 
-                <Button onClick={handleCookingTimeChange}>+</Button>
+                <Button onClick={handleAddCookingTimeChange}>+</Button>
+                <Button onClick={handleMinusCookingTimeChange}>-</Button>
 
                 <Checkbox
                     isChecked={allergenFree}
@@ -114,7 +119,7 @@ export function CreateRecipe({
                         Chinese
                     </MenuItem>
                     <MenuItem onClick={() => handleSelectCuisine("Caribbean")}>
-                        Caribbean{" "}
+                        Caribbean
                     </MenuItem>
                 </MenuList>
             </Menu>
@@ -131,11 +136,14 @@ export function CreateRecipe({
                         Medium
                     </MenuItem>
                     <MenuItem onClick={() => handleSelectSpiceLevel("Hot")}>
-                        Hot{" "}
+                        Hot
                     </MenuItem>
                 </MenuList>
             </Menu>
-            <Button type="submit">Create Recipe</Button>
+
+            <Button type="submit" colorScheme="teal">
+                Create Recipe
+            </Button>
         </form>
     );
 }

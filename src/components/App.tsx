@@ -3,7 +3,6 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { recipeTypeConverted, recipeTypeDB } from "./Interfaces";
 import axios from "axios";
-import { CreateRecipe } from "./CreateRecipe";
 import { NavBar } from "./NavBar";
 
 export const baseURL =
@@ -55,7 +54,6 @@ function App() {
         <div className="App">
             <NavBar />
             <ListOfRecipes allRecipes={recipes} />
-            <CreateRecipe getRecipes={getRecipes} />
         </div>
     );
 }
